@@ -8,7 +8,7 @@
     "dev": "nodemon src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Camila Barros",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
