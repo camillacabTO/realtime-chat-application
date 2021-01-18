@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="icon" href="./img/favicon.png">
+    <title>Chat App</title>
+</head>
+
+<body>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h1>Welcome to the Programming Chat Application</h1>
+            <h3>Join one of the real-time discussion rooms below:</h3>
+            <form action="chat.html">
+                <!-- <label>User Name</label> -->
+                <input type="text" name="username" placeholder="Username" required>
+                <!-- <label for="room">Room</label> -->
+                <select name="room" required>
+                    <option value="" disabled selected>Select a room</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="c++">C++</option>
+                    <option value="swift">Swift</option>
+                </select>
+                <!-- <input type="text" name="room" placeholder="Room" required> -->
+                <button>Join Chat</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
