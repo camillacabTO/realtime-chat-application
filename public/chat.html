@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="icon" href="./img/favicon.png">
-    <title>Chat App</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="icon" href="./img/favicon.png">
+        <title>ProgTalk</title>
+    </head>
 
-<body>
-    <!-- <h1>Chat App</h1> -->
-    <div class="chat">
-        <div class="chat__sidebar" id="sidebar">
-        </div>
-        <div class="chat__main">
-            <div id="messages" class="chat__messages"></div>
-            <div class="compose">
-                <form id="messageForm">
-                    <input type="text" name="message" id="message" placeholder="Message" autocomplete="off" required>
-                    <button id="submit-form">Send</button>
-                </form>
-                <button id="shareLocation">Share Location</button>
+    <body>
+        <div class="chat">
+            <div class="chat__sidebar" id="sidebar">
+            </div>
+            <div class="chat__main">
+                <div id="messages" class="chat__messages"></div>
+                <div class="compose">
+                    <form id="messageForm">
+                        <input type="text" name="message" id="message" placeholder="Message" autocomplete="off"
+                            required>
+                        <button id="submit-form">Send</button>
+                    </form>
+                    <button id="shareLocation">Share Location</button>
+                </div>
             </div>
         </div>
-    </div>
-    <script id="sidebar-template" type="x-tmpl-mustache">
+        <script id="sidebar-template" type="x-tmpl-mustache">
         <h1 class="room-title">{{room}}</h1>
         <h3 class="list-title">Users</h3>
         <ul class="users">
@@ -34,8 +34,8 @@
             {{/users}}
            </ul>
     </script>
-    <script id="message-template" type="x-tmpl-mustache">
-        <div class="message">
+        <script id="message-template" type="x-tmpl-mustache">
+        <div class="message" style="background-color:{{bgColor}} !important; color:{{color}} !important">
             <p>
                 <span class="message__name">{{username}}</span>
                 <span class="message__meta">{{createdAt}}</span>
@@ -43,7 +43,7 @@
             <p>{{msg}}</p>
         </div>
     </script>
-    <script id="location-template" type="x-tmpl-mustache">
+        <script id="location-template" type="x-tmpl-mustache">
         <div class="message">
             <p>
                 <span class="message__name">{{username}}</span>
@@ -52,16 +52,14 @@
             <p><a href="{{locationURL}}" target="_blank">My Current Location</a></p>
         </div>
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="http://localhost/socket.io/socket.io.js"></script> -->
-    <!-- client version of the socketio library -->
-    <script src="./js/chat.js"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./js/chat.js"></script>
+    </body>
 
 </html>

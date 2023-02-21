@@ -4,13 +4,13 @@ const http = require('http')
 const socketio = require('socket.io')
 const {
   generateMessage,
-  generateLocationMessage
+  generateLocationMessage,
 } = require('./utils/messages.js')
 const {
   addUser,
   removeUser,
   getUser,
-  getUsersInRoom
+  getUsersInRoom,
 } = require('./utils/users.js')
 
 const PORT = process.env.PORT || 4000
@@ -18,7 +18,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server) // it is expected to be called with the default http node server
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
   // socket contains info about the new connection. io listens and emits to all connections. socket emits only to a specific connection.
   console.log('New client connected')
 
@@ -39,7 +39,7 @@ io.on('connection', socket => {
     io.to(user.room).emit('usersInRoom', {
       // send a list of active users in the room to all users in that room
       room: user.room,
-      users: getUsersInRoom(user.room)
+      users: getUsersInRoom(user.room),
     })
 
     socket.broadcast
@@ -52,9 +52,12 @@ io.on('connection', socket => {
   socket.on('sendMessage', (msg, cb) => {
     // receive the msg from one client
     const user = getUser(socket.id)
-    io.to(user.room).emit('message', generateMessage(user.username, msg)) // sends the same to all clients
+    io.to(user.room).emit(
+      'message',
+      generateMessage(user.username, msg, '#EEE8A9')
+    ) // sends the same to all clients
     console.log(user.username)
-    cb('Delivered') // event acknowledgement. confirmation of receipment
+    cb('Delivered') // event acknowledgement. confirmation.
   })
 
   socket.on('sendLocation', ({ lat, long }, cb) => {
@@ -82,7 +85,7 @@ io.on('connection', socket => {
 
       io.to(user.room).emit('usersInRoom', {
         room: user.room,
-        users: getUsersInRoom(user.room)
+        users: getUsersInRoom(user.room),
       })
     }
   })

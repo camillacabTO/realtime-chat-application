@@ -5,7 +5,7 @@ const sidebarTemplate = $('#sidebar-template').html()
 
 const { username, room } = Qs.parse(location.search, {
   //parse params from QS
-  ignoreQueryPrefix: true
+  ignoreQueryPrefix: true,
 })
 
 const autoscroll = () => {
@@ -18,23 +18,24 @@ const autoscroll = () => {
   }
 }
 
-socket.on('message', msg => {
+socket.on('message', (msg) => {
   console.log(msg)
   const rendered = Mustache.render(template, {
     username: msg.username,
     msg: msg.text,
-    createdAt: moment(msg.createdAt).format('h:mm a')
+    createdAt: moment(msg.createdAt).format('h:mm a'),
+    bgColor: msg.bgColor,
   }) // rendering messages with template
   $('#messages').append(rendered)
   autoscroll()
 })
 
-$('#messageForm').submit(e => {
+$('#messageForm').submit((e) => {
   e.preventDefault()
   $('#submit-form').prop('disabled', true) // disable send button
 
   const msg = e.target.elements.message.value
-  socket.emit('sendMessage', msg, confirmation => {
+  socket.emit('sendMessage', msg, (confirmation) => {
     $('#submit-form').prop('disabled', false)
     $('#message').val('').focus() // clean input and add focus
     console.log(confirmation)
@@ -46,23 +47,23 @@ $('#shareLocation').click(() => {
     return alert('Geolocation is not supported by your browser!')
   }
   $('#shareLocation').prop('disable', true)
-  navigator.geolocation.getCurrentPosition(location => {
+  navigator.geolocation.getCurrentPosition((location) => {
     const loc = {
       lat: location.coords.latitude,
-      long: location.coords.longitude
+      long: location.coords.longitude,
     }
-    socket.emit('sendLocation', loc, confirmation => {
+    socket.emit('sendLocation', loc, (confirmation) => {
       $('#shareLocation').prop('disable', false)
       console.log(confirmation)
     })
   })
 })
 
-socket.on('locationMessage', location => {
+socket.on('locationMessage', (location) => {
   const rendered = Mustache.render(locationTemplate, {
     username: location.username,
     locationURL: location.url,
-    createdAt: moment(location.createdAt).format('h:mm a')
+    createdAt: moment(location.createdAt).format('h:mm a'),
   })
   $('#messages').append(rendered)
 })
@@ -72,7 +73,7 @@ socket.on('usersInRoom', ({ room, users }) => {
   $('#sidebar').html(rendered)
 })
 
-socket.emit('joinRoom', { username, room }, error => {
+socket.emit('joinRoom', { username, room }, (error) => {
   if (error) {
     alert(error)
     location.href = '/' // redirects

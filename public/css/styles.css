@@ -4,7 +4,7 @@
   --primary-color-green: #16c79a;
   --secondary-color-darkblue: #19456b;
   --secondary-color-lightblue: #11698e;
-  --background-color: #e7d9ea;
+  --background-color: #fff;
 }
 
 * {
@@ -68,12 +68,13 @@ button:disabled {
 /* Join Page Styles */
 
 .centered-form {
-  background: var(--secondary-color-darkblue);
+  background-image: url('../img/sprinkle.svg');
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .centered-form__box {
@@ -84,8 +85,10 @@ button:disabled {
   box-shadow: 0px 0px 17px 1px #1d1f26;
   background: var(--background-color);
   padding: 24px;
-  width: 60%;
-  height: 60%;
+  min-width: 50%;
+  width: fit-content;
+  min-height: 60%;
+  height: fit-content;
 }
 
 .centered-form__box form {
@@ -100,6 +103,7 @@ button:disabled {
 
 .centered-form button {
   width: 80%;
+  color: #000;
 }
 
 .centered-form input,
@@ -189,6 +193,8 @@ select {
 
 .compose button {
   font-size: 14px;
+  color: #000;
+
 }
 
 /* Chat Sidebar Styles */
