@@ -1,6 +1,6 @@
 const users = []
 
-const addUser = ({ id, username, room }) => {
+const addUser = ({ id, username, room, radColor }) => {
   // return an user obj or error obj
   username = username.trim().toLowerCase()
   room = room.trim().toLowerCase()
@@ -21,7 +21,7 @@ const addUser = ({ id, username, room }) => {
     }
   }
 
-  const user = { id, username, room }
+  const user = { id, username, room, radColor }
   users.push(user)
   return { user }
 }

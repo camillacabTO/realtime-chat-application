@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const http = require('http')
 const socketio = require('socket.io')
+var randomColor = require('randomcolor')
+
 const {
   generateMessage,
   generateLocationMessage,
@@ -23,7 +25,15 @@ io.on('connection', (socket) => {
   console.log('New client connected')
 
   socket.on('joinRoom', ({ username, room }, cb) => {
-    const { error, user } = addUser({ id: socket.id, username, room }) // add user to the array
+    const { error, user } = addUser({
+      id: socket.id,
+      username,
+      room,
+      radColor: randomColor({
+        luminosity: 'light',
+        format: 'hsla',
+      }),
+    }) // add user to the array
 
     if (error) {
       return cb(error) // if there is an error, sends it back to the client as a acknowledgment
@@ -54,7 +64,7 @@ io.on('connection', (socket) => {
     const user = getUser(socket.id)
     io.to(user.room).emit(
       'message',
-      generateMessage(user.username, msg, '#EEE8A9')
+      generateMessage(user.username, msg, user.radColor)
     ) // sends the same to all clients
     console.log(user.username)
     cb('Delivered') // event acknowledgement. confirmation.
