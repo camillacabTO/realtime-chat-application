@@ -6,4 +6,4 @@
 
 The focus is programming discussions with rooms focused on different subjects in Programming where users can exchange real time messages.
 
-### progtalk-chat.up.railway.app
+### https://progtalk-chat.up.railway.app/
